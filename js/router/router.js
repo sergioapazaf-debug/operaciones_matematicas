@@ -1,6 +1,7 @@
 import { renderMenuController } from "../controllers/menuController.js";
 import { renderNotFound } from "../views/notFoundView.js";
 import { renderEnConstruccion } from "../views/enConstruccionView.js";
+import { SumaAController } from "../controllers/sumaAController.js";
 
 export function router() {
     const path = window.location.pathname;
@@ -10,6 +11,10 @@ export function router() {
             renderMenuController("app");
             break;
         case "/suma":
+            const app = document.getElementById("app");
+            const sumaController = new SumaAController(app);
+            sumaController.iniciar();
+            break;
         case "/resta":
         case "/multiplicacion":
         case "/division":

@@ -1,0 +1,68 @@
+.operacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.fila {
+    display: flex;
+    gap: 5px;
+}
+
+.celda,
+.acarreo,
+.digito {
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    flex: 0 0 50px;
+}
+
+.celda {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 1.5rem;
+}
+
+.celda span {
+    display: block;
+}
+
+.celda-vacia {
+    visibility: hidden;
+}
+
+.acarreo {
+    text-align: center;
+    font-size: 1rem;
+    padding: 0;
+}
+
+.digito {
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 0;
+}
+
+.fila-resultado {
+    border-top: 2px solid #212529;
+    padding-top: 5px;
+}
+
+.fila-separador {
+    border-bottom: 2px solid #212529;
+}
+
+.input-correcto {
+    border: 2px solid #198754;
+}
+
+.input-incorrecto {
+    border: 2px solid #dc3545;
+}
