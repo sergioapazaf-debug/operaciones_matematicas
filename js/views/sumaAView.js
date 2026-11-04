@@ -8,6 +8,7 @@ export class SumaAView {
         operacion.classList.add("operacion");
 
         const filaAcarreos = this.crearFilaAcarreos(datos.cantidadDigitosOperandos);
+        console.log(datos.cantidadDigitosOperandos);
 
         const filaSumandoA = this.crearFilaSumando(
             datos.sumandoA,
@@ -49,7 +50,7 @@ export class SumaAView {
         fila.classList.add("fila", "fila-acarreos");
 
         for (let i = 0; i < cantidadDigitos; i++) {
-            const esExtremo = i === 0 || i === cantidadDigitos - 1;
+            const esExtremo = i === cantidadDigitos - 1;
 
             if (esExtremo) {
                 fila.append(this.crearCeldaVacia());

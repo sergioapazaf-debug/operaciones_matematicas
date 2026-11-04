@@ -1,10 +1,12 @@
 import { SumaAModel } from "../models/addition/sumaAModel.js";
 import { SumaAView } from "../views/sumaAView.js";
+import { generarNumeros } from "../utils/generarNumero.js";
 
 export class SumaAController {
     constructor(contenedor) {
         this.contenedor = contenedor;
-        this.modelo = new SumaAModel(34232, 829);
+        const [sumandoA, sumandoB] = generarNumeros(2, 1, 9999);
+        this.modelo = new SumaAModel(sumandoA, sumandoB);
         this.vista = new SumaAView(contenedor);
     }
 
