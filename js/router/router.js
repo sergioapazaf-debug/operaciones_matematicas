@@ -1,16 +1,19 @@
 import { renderMenuController } from "../controllers/menuController.js";
 import { renderNotFound } from "../views/notFoundView.js";
+import { renderEnConstruccion } from "../views/enConstruccionView.js";
 
 export function router() {
     const path = window.location.pathname;
     console.log(path);
     switch (path) {
         case "/":
+            renderMenuController("app");
+            break;
         case "/suma":
         case "/resta":
         case "/multiplicacion":
         case "/division":
-            renderMenuController();
+            document.getElementById("app").innerHTML = renderEnConstruccion();
             break;
 
         default:
