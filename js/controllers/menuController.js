@@ -5,3 +5,4 @@ export function renderMenuController() {
 
     app.innerHTML = renderMenu();
 }
+
