@@ -4,7 +4,9 @@ import { renderEnConstruccion } from "../views/enConstruccionView.js";
 import { SumaAController } from "../controllers/sumaAController.js";
 
 export function router() {
-    const path = window.location.pathname;
+    console.log("ini router.");
+    const BASE_PATH = "/operaciones_matematicas"
+    const path = window.location.pathname.replace(BASE_PATH, "");
     console.log(path);
     switch (path) {
         case "/":
@@ -34,7 +36,9 @@ document.addEventListener("click", (event) => {
 
     event.preventDefault();
 
-    const path = link.getAttribute("href");
+    const path = "/operaciones_matematicas" + link.getAttribute("href");
+
+    console.log(path);
 
     window.history.pushState({}, "", path);
 
