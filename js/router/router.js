@@ -36,11 +36,9 @@ document.addEventListener("click", (event) => {
 
     event.preventDefault();
 
-    let path = link.getAttribute("href");
+    const path = "/operaciones_matematicas" + link.getAttribute("href");
 
-    if (path === "/") {
-        path = "/operaciones_matematicas/";
-    }
+    console.log(path);
 
     window.history.pushState({}, "", path);
 
