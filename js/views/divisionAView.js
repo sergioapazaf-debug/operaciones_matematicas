@@ -5,6 +5,8 @@ export class DivisionAView {
         this.divisor = datos.divisor;
         this.cantidadCifras = String(datos.dividendo).length;
         this.cantidadCifrasCociente = String(datos.cociente).length;
+        this.elemento = null;
+        this.onConsultar = () => { };
     }
 
     render() {
@@ -80,9 +82,67 @@ export class DivisionAView {
 
         seccionDivisor.append(cifraDivisor, linea, entradasCociente);
 
+        // Contenedor del botón
+        const contenedorBoton = document.createElement("div");
+        contenedorBoton.classList.add("contenedor-boton");
+
+        // Botón consultar
+        const botonConsultar = document.createElement("button");
+        botonConsultar.type = "button";
+        botonConsultar.classList.add("btn", "btn-primary");
+        botonConsultar.textContent = "Consultar";
+        botonConsultar.addEventListener("click", () => {
+            this.onConsultar();
+        });
+
+        contenedorBoton.append(botonConsultar);
+
+        // Agregar elementos
         operacion.append(seccionDividendo, seccionDivisor);
 
-        return operacion;
+        const contenedorOperacion = document.createElement("div");
+        contenedorOperacion.classList.add("contenedor-operacion");
+
+        contenedorOperacion.append(operacion, contenedorBoton);
+
+        this.elemento = contenedorOperacion;
+        return this.elemento;
     }
 
+    obtenerProcedimientos() {
+        const procedimientos = [];
+
+        const filas = this.elemento.querySelectorAll(".fila-procedimiento");
+
+        filas.forEach(fila => {
+            const valores = [...fila.querySelectorAll("input")]
+                .filter(input => !input.classList.contains("invisible"))
+                .map(input => input.value);
+
+            procedimientos.push(valores);
+        });
+
+        return procedimientos;
+    }
+
+    obtenerCociente() {
+        return [...this.elemento.querySelectorAll(".input-cociente")]
+            .map(input => input.value);
+    }
+
+    asignarEventoConsultar(callback) {
+        this.onConsultar = callback;
+    }
+
+    marcarCociente(resultados) {
+        const entradas = this.elemento.querySelectorAll(".input-cociente");
+
+        entradas.forEach((input, indice) => {
+            input.classList.remove("correcto", "incorrecto");
+
+            input.classList.add(
+                resultados[indice] ? "correcto" : "incorrecto"
+            );
+        });
+    }
 }

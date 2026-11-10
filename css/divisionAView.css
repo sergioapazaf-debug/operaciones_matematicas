@@ -1,9 +1,12 @@
 /* Contenedor principal */
 .operacion.division {
     display: flex;
-    align-items: stretch;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
     gap: 0;
-    width: fit-content;
+    width: max-content;
+    max-width: none;
     padding: 10px;
 }
 
@@ -132,4 +135,19 @@
         padding-left: 7px;
         min-width: 85px;
     }
+}
+
+/* Indicadores de revisión */
+.input-cociente {
+    position: relative;
+}
+
+.input-cociente.correcto {
+    border-color: #198754;
+    background-image: none;
+}
+
+.input-cociente.incorrecto {
+    border-color: #dc3545;
+    background-image: none;
 }

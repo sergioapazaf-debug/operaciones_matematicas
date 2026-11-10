@@ -21,10 +21,12 @@ export class DivisionAModel {
         this.cociente += resultadoActual.cociente;
 
         let dividendoActual = String(this.dividendo);
-        dividendoActual = dividendoActual.slice(minimoActual.parteDividendo.length);
+        let aElimniar = minimoActual.parteDividendo.length;
+        dividendoActual = dividendoActual.slice(aElimniar);
 
         while (dividendoActual.length > 0) {
-            minimoActual = this.descomponerDividendo(dividendoActual, this.divisor, false, resultadoActual.resto);
+            residuoAnterior = resultadoActual.resto;
+            minimoActual = this.descomponerDividendo(dividendoActual, this.divisor, false, residuoAnterior);
             resultadoActual = this.dividirMinimo(Number(minimoActual.parteDividendo), this.divisor);
 
             this.procedimientos.push({
@@ -34,7 +36,8 @@ export class DivisionAModel {
             });
 
             this.cociente += "0".repeat(Number(minimoActual.cociente)) + resultadoActual.cociente;
-            dividendoActual = dividendoActual.slice(minimoActual.parteDividendo.length);
+            aElimniar = minimoActual.parteDividendo.length - (residuoAnterior==0?0:String(residuoAnterior).length);
+            dividendoActual = dividendoActual.slice(aElimniar);
         }
 
         this.residuo = resultadoActual.resto;
