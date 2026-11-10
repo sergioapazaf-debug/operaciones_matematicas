@@ -1,0 +1,135 @@
+/* Contenedor principal */
+.operacion.division {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    width: fit-content;
+    padding: 10px;
+}
+
+/* ==============================
+   SECCIÓN DEL DIVIDENDO
+================================ */
+
+.seccion-dividendo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 10px;
+}
+
+/* Cifras del dividendo */
+.cifras-dividendo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    min-height: 35px;
+}
+
+.cifras-dividendo span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 37px;
+    height: 35px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+/* ==============================
+   MATRIZ DE PROCEDIMIENTOS
+================================ */
+
+.matriz-procedimientos {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.fila-procedimiento {
+    display: flex;
+    gap: 2px;
+    min-height: 35px;
+}
+
+/* ==============================
+   SECCIÓN DEL DIVISOR
+================================ */
+
+.seccion-divisor {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-left: 2px solid #dc3545;
+    padding-left: 10px;
+    min-width: 100px;
+}
+
+/* Cifra del divisor */
+.cifra-divisor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+/* Línea horizontal */
+.linea-division {
+    width: 100%;
+    height: 2px;
+    background-color: #dc3545;
+    margin: 0 0 8px 0;
+}
+
+/* ==============================
+   ENTRADAS DEL COCIENTE
+================================ */
+
+.entradas-cociente {
+    display: flex;
+    gap: 2px;
+}
+
+/* ==============================
+   CAMPOS DE ENTRADA
+================================ */
+
+.input-procedimiento,
+.input-cociente {
+    flex: 0 0 37px;
+    width: 37px;
+    height: 35px;
+    padding: 2px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* ==============================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 480px) {
+    .operacion.division {
+        padding: 5px;
+    }
+
+    .cifras-dividendo span {
+        width: 32px;
+    }
+
+    .input-procedimiento,
+    .input-cociente {
+        flex-basis: 32px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .seccion-divisor {
+        padding-left: 7px;
+        min-width: 85px;
+    }
+}
