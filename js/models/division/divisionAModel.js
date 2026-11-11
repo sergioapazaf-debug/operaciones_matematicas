@@ -11,12 +11,14 @@ export class DivisionAModel {
         let residuoAnterior = 0;
         let minimoActual = this.descomponerDividendo(this.dividendo, this.divisor, true, residuoAnterior);
         let resultadoActual = this.dividirMinimo(Number(minimoActual.parteDividendo), this.divisor);
+        let cerosIzq = 0;
 
         this.procedimientos.push({
-            dividendoParcial: Number(minimoActual.parteDividendo),
+            dividendoParcial: minimoActual.parteDividendo,
             cociente: String(resultadoActual.cociente),
             residuo: resultadoActual.resto
         });
+
 
         this.cociente += resultadoActual.cociente;
 
@@ -25,20 +27,28 @@ export class DivisionAModel {
         dividendoActual = dividendoActual.slice(aElimniar);
 
         while (dividendoActual.length > 0) {
+            cerosIzq = this.procedimientos.at(-1).dividendoParcial.length + 1;
             residuoAnterior = resultadoActual.resto;
             minimoActual = this.descomponerDividendo(dividendoActual, this.divisor, false, residuoAnterior);
             resultadoActual = this.dividirMinimo(Number(minimoActual.parteDividendo), this.divisor);
+            cerosIzq = cerosIzq - minimoActual.parteDividendo.length;
 
             this.procedimientos.push({
-                dividendoParcial: Number(minimoActual.parteDividendo),
+                dividendoParcial: "0".repeat(cerosIzq) + "0".repeat(Number(minimoActual.cociente)) + minimoActual.parteDividendo,
                 cociente: "0".repeat(Number(minimoActual.cociente)) + resultadoActual.cociente,
                 residuo: resultadoActual.resto
             });
 
             this.cociente += "0".repeat(Number(minimoActual.cociente)) + resultadoActual.cociente;
-            aElimniar = minimoActual.parteDividendo.length - (residuoAnterior==0?0:String(residuoAnterior).length);
+            aElimniar = minimoActual.parteDividendo.length - (residuoAnterior == 0 ? 0 : String(residuoAnterior).length);
             dividendoActual = dividendoActual.slice(aElimniar);
         }
+
+        this.procedimientos.push({
+            dividendoParcial: "0".repeat(String(this.dividendo).length - String(resultadoActual.resto).length) + resultadoActual.resto,
+            cociente: "x",
+            residuo: "x"
+        });
 
         this.residuo = resultadoActual.resto;
     }
@@ -95,5 +105,15 @@ export class DivisionAModel {
         }
     }
 
+    obtenerProcedimientos() {
+        return this.procedimientos.map((procedimiento, indice) => {
+            if (indice === 0) return { ...procedimiento };
 
+            const cantidadX = String(this.dividendo).length - procedimiento.dividendoParcial.length;
+            return {
+                ...procedimiento,
+                dividendoParcial: procedimiento.dividendoParcial + "x".repeat(cantidadX)
+            };
+        });
+    }
 }

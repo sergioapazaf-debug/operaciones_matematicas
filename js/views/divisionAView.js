@@ -130,6 +130,21 @@ export class DivisionAView {
             .map(input => input.value);
     }
 
+    obtenerProcedimientos() {
+        const procedimientos = [];
+
+        const filas = this.elemento.querySelectorAll(".fila-procedimiento");
+
+        filas.forEach(fila => {
+            const valores = [...fila.querySelectorAll("input")]
+                .map(input => input.value);
+
+            procedimientos.push(valores);
+        });
+
+        return procedimientos;
+    }
+
     asignarEventoConsultar(callback) {
         this.onConsultar = callback;
     }
@@ -143,6 +158,26 @@ export class DivisionAView {
             input.classList.add(
                 resultados[indice] ? "correcto" : "incorrecto"
             );
+        });
+    }
+
+    marcarProcedimientos(resultados) {
+        const filas = this.elemento.querySelectorAll(".fila-procedimiento");
+
+        filas.forEach((fila, indiceFila) => {
+            const entradas = fila.querySelectorAll("input");
+
+            entradas.forEach((input, indiceColumna) => {
+                input.classList.remove("correcto", "incorrecto");
+
+                if (input.classList.contains("invisible")) return;
+
+                input.classList.add(
+                    resultados[indiceFila][indiceColumna]
+                        ? "correcto"
+                        : "incorrecto"
+                );
+            });
         });
     }
 }

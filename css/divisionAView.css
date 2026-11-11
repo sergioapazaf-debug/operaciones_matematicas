@@ -1,4 +1,7 @@
-/* Contenedor principal */
+/* ==============================
+   CONTENEDOR PRINCIPAL
+================================ */
+
 .operacion.division {
     display: flex;
     flex-direction: row;
@@ -112,6 +115,42 @@
 }
 
 /* ==============================
+   CONTENEDOR DEL BOTÓN
+================================ */
+
+.contenedor-operacion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+}
+
+.contenedor-boton {
+    margin-top: 15px;
+}
+
+/* ==============================
+   INDICADORES DE REVISIÓN
+================================ */
+
+.input-procedimiento,
+.input-cociente {
+    position: relative;
+}
+
+.input-procedimiento.correcto,
+.input-cociente.correcto {
+    border-color: #198754;
+    background-image: none;
+}
+
+.input-procedimiento.incorrecto,
+.input-cociente.incorrecto {
+    border-color: #dc3545;
+    background-image: none;
+}
+
+/* ==============================
    RESPONSIVE
 ================================ */
 
@@ -135,19 +174,4 @@
         padding-left: 7px;
         min-width: 85px;
     }
-}
-
-/* Indicadores de revisión */
-.input-cociente {
-    position: relative;
-}
-
-.input-cociente.correcto {
-    border-color: #198754;
-    background-image: none;
-}
-
-.input-cociente.incorrecto {
-    border-color: #dc3545;
-    background-image: none;
 }
