@@ -31,7 +31,19 @@ export class DivisionAController {
 
     iniciar() {
         this.vista.asignarEventoConsultar(() => this.revisar());
+
+        this.vista.asignarEventoGuardarConfiguracion(
+            (digitosDividendo, digitosDivisor) => {
+                this.actualizarConfiguracion(digitosDividendo, digitosDivisor);
+            }
+        );
+
         this.contenedor.append(this.vista.render());
+
+        this.vista.asignarEventoAbrirConfiguracion((modal) => {
+            const instanciaModal = bootstrap.Modal.getOrCreateInstance(modal);
+            instanciaModal.show();
+        });
     }
 
     revisar() {
@@ -87,6 +99,43 @@ export class DivisionAController {
         });
 
         this.vista.marcarProcedimientos(resultados);
+    }
+
+    actualizarConfiguracion(digitosDividendo, digitosDivisor) {
+
+        // Guardar configuración
+        this.modelo.guardarConfiguracion(
+            digitosDividendo,
+            digitosDivisor
+        );
+
+        // Generar nuevo dividendo
+        const [dividendo] = generarNumeros(
+            1,
+            10 ** (digitosDividendo - 1),
+            10 ** digitosDividendo - 1
+        );
+
+        // Generar nuevo divisor
+        const [divisor] = generarNumeros(
+            1,
+            10 ** (digitosDivisor - 1),
+            10 ** digitosDivisor - 1
+        );
+
+        // Crear nuevo modelo
+        this.modelo = new DivisionAModel(dividendo, divisor);
+        this.modelo.calcularDivision();
+
+        // Actualizar vista
+        this.vista.actualizarDatos({
+            dividendo: this.modelo.dividendo,
+            divisor: this.modelo.divisor,
+            cociente: this.modelo.cociente
+        });
+
+        // Renderizar nueva operación
+        this.contenedor.replaceChildren(this.vista.render());
     }
 
 }

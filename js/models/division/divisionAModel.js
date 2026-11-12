@@ -116,4 +116,13 @@ export class DivisionAModel {
             };
         });
     }
+
+    guardarConfiguracion(digitosDividendo, digitosDivisor) {
+        const configuracion = {
+            digitosDividendo,
+            digitosDivisor
+        };
+
+        localStorage.setItem("divisionAConfiguracion", JSON.stringify(configuracion));
+    }
 }
